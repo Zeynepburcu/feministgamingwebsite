@@ -1,0 +1,195 @@
+/* Font Setup */
+@font-face {
+    font-family: 'Anton';
+    src: url('fonts/Anton-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'GlacialIndifference';
+    src: url('fonts/GlacialIndifference-Regular.otf') format('opentype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'GlacialIndifference';
+    src: url('fonts/GlacialIndifference-Bold.otf') format('opentype');
+    font-weight: bold;
+}
+
+:root {
+    --magenta: #ff3aaa;      /* Primary Accent */
+    --bright-green: #bcfd04; /* Secondary Accent */
+    --bg-grey: #1e1e1e;      /* Soft Dark Grey */
+    --bg-sidebar: #252525;   /* Slightly lighter grey for contrast */
+    --text-white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'GlacialIndifference', sans-serif;
+    background-color: var(--bg-grey);
+    color: var(--text-white);
+    line-height: 1.7;
+}
+
+h1, h2, h3, summary {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h2 {
+    color: var(--magenta);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: var(--bg-grey);
+    border-bottom: 3px solid var(--magenta);
+    padding: 25px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: var(--text-white);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--bright-green);
+}
+
+/* Logo Banner */
+.logo-banner {
+    background-color: #ffffff; /* White background for transparent PNG logos */
+    padding: 40px 0;
+    text-align: center;
+}
+
+.banner-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Layout */
+.main-layout {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.content-area {
+    flex: 2;
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+/* Sidebar */
+.news-sidebar {
+    flex: 1;
+    background: var(--bg-sidebar);
+    padding: 25px;
+    border-radius: 4px;
+    border-top: 5px solid var(--bright-green);
+    height: fit-content;
+}
+
+.news-sidebar h3 {
+    color: var(--bright-green);
+    margin-bottom: 15px;
+}
+
+.news-item {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.news-item .date {
+    font-size: 0.8rem;
+    color: var(--bright-green);
+    font-weight: bold;
+}
+
+/* Toggles */
+details.toggle-item {
+    background: var(--bg-sidebar);
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+summary {
+    padding: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+summary:hover {
+    background: #2a2a2a;
+    color: var(--magenta);
+}
+
+.toggle-content {
+    padding: 20px;
+    border-top: 1px solid #3d3d3d;
+}
+
+/* Contact Specific Styles */
+.contact-links p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+.social-list {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.social-list li {
+    margin-bottom: 10px;
+}
+
+/* Global Links */
+a {
+    color: var(--magenta);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: var(--bright-green);
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    padding: 80px 0;
+    border-top: 1px solid #3d3d3d;
+    color: #888;
+    font-size: 0.85rem;
+}
