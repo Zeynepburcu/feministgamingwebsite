@@ -95,6 +95,70 @@ nav a:hover {
     height: auto;
 }
 
+/* Home feature frames */
+.home-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+}
+
+.feature-frame {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-sidebar);
+    border: 1px solid #3d3d3d;
+    border-top: 5px solid var(--magenta);
+    border-radius: 8px;
+    padding: 34px 30px;
+    transition: transform 0.2s ease;
+}
+
+.feature-frame:hover {
+    transform: translateY(-3px);
+}
+
+.feature-frame.oal {
+    border-top-color: var(--bright-green);
+}
+
+.feature-tag {
+    align-self: flex-start;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    border-radius: 3px;
+    background: var(--magenta);
+    color: var(--text-white);
+    margin-bottom: 16px;
+}
+
+.feature-frame.oal .feature-tag {
+    background: var(--bright-green);
+    color: var(--bg-grey);
+}
+
+.feature-frame h2 {
+    margin-bottom: 12px;
+}
+
+.feature-frame.oal h2 {
+    color: var(--bright-green);
+}
+
+.feature-frame p {
+    color: #ccc;
+    margin-bottom: 26px;
+    flex-grow: 1;
+}
+
+.feature-frame .btn-primary,
+.feature-frame .btn-secondary {
+    align-self: flex-start;
+}
+
 /* Layout */
 .main-layout {
     display: flex;
@@ -593,6 +657,10 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .home-features {
+        grid-template-columns: 1fr;
+    }
+
     .fellowship-cards {
         grid-template-columns: 1fr;
     }
