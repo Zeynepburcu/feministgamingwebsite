@@ -415,10 +415,190 @@ footer {
     transform: translateY(-2px);
 }
 
+/* Key Facts strip */
+.fellowship-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.fellowship-fact {
+    flex: 1;
+    min-width: 130px;
+    background: rgba(0, 0, 0, 0.22);
+    border-radius: 6px;
+    padding: 18px 14px;
+    text-align: center;
+}
+
+.fellowship-fact .num {
+    display: block;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.8rem;
+    color: var(--bright-green);
+    line-height: 1.1;
+}
+
+.fellowship-fact .label {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ccc;
+}
+
+/* Callout box */
+.fellowship-callout {
+    background: rgba(255, 58, 170, 0.07);
+    border-left: 4px solid var(--magenta);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 24px 0;
+}
+
+.fellowship-callout p {
+    color: #ccc;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.fellowship-callout strong {
+    color: var(--text-white);
+}
+
+/* Role toggles */
+.fellowship-roles {
+    margin-top: 30px;
+}
+
+.fellowship-roles details.toggle-item {
+    border-left: 4px solid var(--magenta);
+}
+
+.fellowship-roles summary {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-size: 1rem;
+}
+
+.role-num {
+    font-family: 'Anton', sans-serif;
+    color: var(--bright-green);
+    font-size: 1.1rem;
+}
+
+.role-why {
+    margin-top: 14px;
+    color: #ccc;
+    font-size: 0.92rem;
+    font-style: italic;
+}
+
+.role-why strong {
+    color: var(--bright-green);
+    font-style: normal;
+}
+
+/* Application steps */
+.fellowship-steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 24px 0;
+    padding: 0;
+}
+
+.fellowship-steps li {
+    position: relative;
+    counter-increment: step;
+    padding: 0 0 22px 52px;
+}
+
+.fellowship-steps li:last-child {
+    padding-bottom: 0;
+}
+
+.fellowship-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 34px;
+    height: 34px;
+    background: var(--magenta);
+    color: var(--text-white);
+    font-family: 'Anton', sans-serif;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fellowship-steps strong {
+    color: var(--text-white);
+}
+
+/* Email application box */
+.fellowship-apply-box {
+    text-align: center;
+    background: var(--bg-sidebar);
+    border: 1px solid #3d3d3d;
+    border-radius: 8px;
+    padding: 28px 24px;
+    margin: 28px 0;
+}
+
+.fellowship-apply-box .apply-label {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--bright-green);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.fellowship-apply-box .apply-email {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    color: var(--magenta);
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.fellowship-apply-box .apply-email:hover {
+    color: var(--bright-green);
+}
+
+.fellowship-apply-box .apply-hint {
+    margin-top: 12px;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* Deadline highlight */
+.fellowship-deadline {
+    margin-top: 24px;
+    text-align: center;
+    background: var(--magenta);
+    color: var(--text-white);
+    padding: 16px;
+    border-radius: 6px;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .fellowship-cards {
         grid-template-columns: 1fr;
+    }
+
+    .fellowship-fact {
+        min-width: 45%;
     }
 
     .fellowship-hero h2 {
