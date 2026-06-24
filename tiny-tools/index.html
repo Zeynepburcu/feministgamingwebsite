@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Game Making Tools | Feminist Gaming Project</title>
+    <meta name="description" content="A curated collection of free-to-use, mostly open-access game-making tools — sorted by how tiny they are, from get-started-in-minutes to fuller engines.">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+    <div class="container header-content">
+        <a href="../index.html" class="logo-link"><img src="../images/FG_Logo_TransparentWhite.png" alt="Feminist Gaming"></a>
+        <nav>
+            <a href="../index.html">About</a>
+            <a href="../OAL/index.html">OAL</a>
+            <a href="../fellowship/index.html">Fellowship</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Hero Section -->
+    <section class="fellowship-hero">
+        <div class="fellowship-hero-badge">Resource</div>
+        <h2>Tiny Game Making Tools</h2>
+        <p class="fellowship-hero-tagline">Small, accessible tools for making games</p>
+        <p>A collection of free-to-use, mostly open-access game-making tools. Some are aimed at particular genres; some are open to forms of self-expression beyond games. Most aren't just about the functionality of making a game — they're full communities, with their own subculture, shared knowledge, and events, awaiting your contribution.</p>
+    </section>
+
+    <!-- Tools list (rendered from tools.csv) -->
+    <section class="fellowship-section">
+        <h2>The Tools</h2>
+        <p class="tools-legend"><strong>How tiny?</strong> The 🤏 rating is the main way to browse: <strong>🤏</strong> are the tiniest, get-started-in-minutes tools, through to <strong>🤏🤏🤏</strong> — fuller engines you can still make tiny games with. Filter by tininess below.</p>
+        <div class="tools-controls" id="tools-controls" hidden></div>
+        <div class="tools-grid" id="tools-grid"></div>
+        <p class="tools-status" id="tools-status">Loading tools…</p>
+    </section>
+
+    <!-- Asset resources (rendered from assets.csv) -->
+    <section class="fellowship-section">
+        <h2>Game Asset Resources</h2>
+        <p>Free and open libraries of art, models, music, and icons to drop into your games.</p>
+        <div class="tools-grid" id="assets-grid"></div>
+        <p class="tools-status" id="assets-status">Loading resources…</p>
+    </section>
+
+    <!-- More on the topic -->
+    <section class="fellowship-section">
+        <h2>More on the Topic</h2>
+        <ul class="fellowship-criteria">
+            <li>A more comprehensive (if slightly outdated) collection of game-making tools: <a href="https://creatools.gameclassification.com/EN/index.html" target="_blank" rel="noopener">creatools.gameclassification.com</a></li>
+            <li>Nathalie Lawhead (alienmelon) has a <a href="https://www.nathalielawhead.com/candybox/the-wonderful-world-of-tools-made-by-small-teams-solo-devs-and-shareware-weird-beautiful-and-experimental-things-to-be-creative-in-an-analysis-on-building-for-approachability" target="_blank" rel="noopener">wonderful blog post</a> on these tools and why they matter for creatives.</li>
+            <li>Follow <a href="http://gamepoems.com/" target="_blank" rel="noopener">Game Poems Magazine</a> — don't overthink it, and submit your tiny game!</li>
+            <li>Visit <a href="https://freegamedev.net/" target="_blank" rel="noopener">freegamedev.net</a> for a community around open-source game-making tools.</li>
+        </ul>
+        <p class="fellowship-note">Many of these communities host online game jams and Discord servers you can join.</p>
+        <div class="fellowship-callout">
+            <p>For suggestions, corrections, and comments, write to us at <a href="mailto:feministgamingproject@gmail.com">feministgamingproject@gmail.com</a> or <a href="mailto:feministgaming@protonmail.com">feministgaming@protonmail.com</a>.</p>
+        </div>
+        <p class="fellowship-note">Collection kickstarted by juno.ka from the Feminist Gaming Project. Thanks to collaborators narnar and Pablo San Gregorio.</p>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Feminist Gaming Project. Building an inclusive digital commons.</p>
+    </div>
+</footer>
+
+<script>
+// Tiny Game Making Tools — content is driven by CSV files.
+// To add or edit entries, just edit tools.csv (name, description, how_tiny, where, url)
+// or assets.csv (name, description, url). No code changes needed.
+(function () {
+    // Minimal CSV parser supporting quoted fields, escaped quotes (""), and newlines in fields.
+    function parseCSV(text) {
+        var rows = [], row = [], field = '', inQuotes = false;
+        for (var i = 0; i < text.length; i++) {
+            var c = text[i];
+            if (inQuotes) {
+                if (c === '"') {
+                    if (text[i + 1] === '"') { field += '"'; i++; }
+                    else { inQuotes = false; }
+                } else { field += c; }
+            } else if (c === '"') {
+                inQuotes = true;
+            } else if (c === ',') {
+                row.push(field); field = '';
+            } else if (c === '\n') {
+                row.push(field); rows.push(row); row = []; field = '';
+            } else if (c !== '\r') {
+                field += c;
+            }
+        }
+        if (field.length || row.length) { row.push(field); rows.push(row); }
+        return rows;
+    }
+
+    function rowsToObjects(rows) {
+        if (!rows.length) return [];
+        var header = rows.shift().map(function (h) { return h.trim().toLowerCase(); });
+        return rows
+            .filter(function (r) { return r.some(function (c) { return c.trim() !== ''; }); })
+            .map(function (r) {
+                var obj = {};
+                header.forEach(function (h, i) { obj[h] = (r[i] || '').trim(); });
+                return obj;
+            });
+    }
+
+    function escapeHTML(s) {
+        return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function firstURL(s) {
+        return (s || '').trim().split(/\s+/)[0] || '';
+    }
+
+    function loadCSV(path) {
+        return fetch(path, { cache: 'no-cache' })
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            })
+            .then(function (text) { return rowsToObjects(parseCSV(text)); });
+    }
+
+    // ---- Tools (filterable by "how tiny?") ----
+    (function () {
+        var grid = document.getElementById('tools-grid');
+        var controls = document.getElementById('tools-controls');
+        var status = document.getElementById('tools-status');
+        var all = [];
+        var active = 'All';
+
+        var TINY_WORDS = { 1: 'Tiniest', 2: 'Small', 3: 'Bigger' };
+        // Count code points (a 🤏 is a surrogate pair, so String.length would double-count).
+        function tinyCount(s) { return Array.from(s || '').length; }
+
+        function card(t) {
+            var url = firstURL(t.url);
+            var wheres = (t.where || '').split(',').map(function (w) { return w.trim(); }).filter(Boolean);
+            var whereTags = wheres.map(function (w) { return '<span class="tool-where">' + escapeHTML(w) + '</span>'; }).join('');
+            var top = '<div class="tool-card-top">' +
+                (t.how_tiny ? '<span class="tool-tiny" title="How tiny?">' + escapeHTML(t.how_tiny) + '</span>' : '') +
+                whereTags + '</div>';
+            var inner = top +
+                '<h3>' + escapeHTML(t.name) + '</h3>' +
+                '<p>' + escapeHTML(t.description) + '</p>' +
+                (url ? '<span class="tool-visit">Visit →</span>' : '');
+            return url
+                ? '<a class="tool-card" href="' + escapeHTML(url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+                : '<div class="tool-card">' + inner + '</div>';
+        }
+
+        function render() {
+            var list = active === 'All' ? all : all.filter(function (t) { return t.how_tiny === active; });
+            list = list.slice().sort(function (a, b) {
+                return tinyCount(a.how_tiny) - tinyCount(b.how_tiny) || a.name.localeCompare(b.name);
+            });
+            grid.innerHTML = list.map(card).join('');
+        }
+
+        function buildFilters() {
+            var levels = [];
+            all.forEach(function (t) { if (t.how_tiny && levels.indexOf(t.how_tiny) === -1) levels.push(t.how_tiny); });
+            levels.sort(function (a, b) { return tinyCount(a) - tinyCount(b); });
+            if (!levels.length) return;
+            var btns = ['<button class="tools-filter active" data-val="All">All</button>'];
+            levels.forEach(function (lv) {
+                var word = TINY_WORDS[tinyCount(lv)] || '';
+                btns.push('<button class="tools-filter" data-val="' + escapeHTML(lv) + '">' + escapeHTML(lv) + (word ? ' ' + word : '') + '</button>');
+            });
+            controls.hidden = false;
+            controls.innerHTML = btns.join('');
+            controls.addEventListener('click', function (e) {
+                var btn = e.target.closest('.tools-filter');
+                if (!btn) return;
+                active = btn.getAttribute('data-val');
+                controls.querySelectorAll('.tools-filter').forEach(function (b) { b.classList.toggle('active', b === btn); });
+                render();
+            });
+        }
+
+        loadCSV('tools.csv').then(function (tools) {
+            all = tools;
+            if (!all.length) { status.textContent = 'No tools listed yet.'; return; }
+            status.hidden = true;
+            buildFilters();
+            render();
+        }).catch(function (err) {
+            status.textContent = 'Could not load the tools list. (If you opened this file directly, view it through a web server instead — the list loads from tools.csv.)';
+            console.error('tools.csv load failed:', err);
+        });
+    })();
+
+    // ---- Asset resources (simple cards) ----
+    (function () {
+        var grid = document.getElementById('assets-grid');
+        var status = document.getElementById('assets-status');
+        loadCSV('assets.csv').then(function (items) {
+            if (!items.length) { status.textContent = 'No resources listed yet.'; return; }
+            status.hidden = true;
+            grid.innerHTML = items.map(function (a) {
+                var url = firstURL(a.url);
+                var inner = '<h3>' + escapeHTML(a.name) + '</h3>' +
+                    '<p>' + escapeHTML(a.description) + '</p>' +
+                    (url ? '<span class="tool-visit">Visit →</span>' : '');
+                return url
+                    ? '<a class="tool-card asset" href="' + escapeHTML(url) + '" target="_blank" rel="noopener">' + inner + '</a>'
+                    : '<div class="tool-card asset">' + inner + '</div>';
+            }).join('');
+        }).catch(function (err) {
+            status.textContent = 'Could not load the resource list. (View this page through a web server — it loads from assets.csv.)';
+            console.error('assets.csv load failed:', err);
+        });
+    })();
+})();
+</script>
+
+</body>
+</html>

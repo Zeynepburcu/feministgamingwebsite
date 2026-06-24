@@ -653,6 +653,128 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Tiny Game Making Tools */
+.tools-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 26px 0 30px;
+}
+
+.tools-filter {
+    background: var(--bg-sidebar);
+    border: 1px solid #3d3d3d;
+    color: var(--text-white);
+    font-family: 'GlacialIndifference', sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.tools-filter:hover {
+    border-color: var(--magenta);
+    color: var(--magenta);
+}
+
+.tools-filter.active {
+    background: var(--magenta);
+    border-color: var(--magenta);
+    color: var(--text-white);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 22px;
+}
+
+.tool-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-sidebar);
+    border-radius: 6px;
+    border-left: 4px solid var(--bright-green);
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text-white);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+a.tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--magenta);
+    color: var(--text-white);
+}
+
+.tool-card.asset {
+    border-left-color: var(--magenta);
+}
+
+.tool-card-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tool-tiny {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.tool-where {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.6rem;
+    color: #bbb;
+    border: 1px solid #3d3d3d;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.tools-legend {
+    color: #ccc;
+    font-size: 0.95rem;
+    background: rgba(188, 253, 4, 0.06);
+    border-left: 4px solid var(--bright-green);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-top: 10px;
+}
+
+.tool-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text-white);
+}
+
+.tool-card p {
+    color: #ccc;
+    font-size: 0.92rem;
+    flex-grow: 1;
+}
+
+.tool-visit {
+    margin-top: 14px;
+    color: var(--magenta);
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+a.tool-card:hover .tool-visit {
+    color: var(--bright-green);
+}
+
+.tools-status {
+    color: #ccc;
+    padding: 20px 0;
+}
+
 /* Deadline highlight */
 .fellowship-deadline {
     margin-top: 24px;

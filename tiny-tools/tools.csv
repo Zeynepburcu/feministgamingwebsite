@@ -1,0 +1,19 @@
+name,description,how_tiny,where,url
+Bitsy,"A little engine for little games, worlds, and stories.",🤏,web browser,https://bitsy.org/
+Downpour,"The best way to make games on your phone — collage photos, drawings and text into an interactive story. Quick enough to finish before your tea goes cold.",🤏,mobile download,https://downpour.games/
+Flickgame,"A tiny game engine — easy to use, with HTML export. Draw on slides and connect them together.",🤏,web browser,https://www.flickgame.org/index.html
+GB Studio,A quick and easy drag-and-drop retro game creator for your favourite handheld console.,🤏,pc download,https://www.gbstudio.dev/
+Narrat,"A beginner-friendly engine for narrative games with RPG features, visual novels and interactive fiction. No coding required — a simple scripting syntax with skills, items, quests and branching choices.",🤏,web browser,https://narrat.dev/
+PuzzleScript,An open-source HTML5 puzzle game engine.,🤏,web browser,https://www.puzzlescript.net/
+Whimtale,"A small game engine and fantasy console for making interactive stories you can navigate and talk with — narrative-driven exploratory games with no prior experience needed.",🤏,"pc download, web browser",https://whimsy.rocks/
+Wareware,"(In development) A hot new 3D game maker — build your dream game and finally get on with your life.",🤏,web browser,https://wareware.rip/
+Libresprite,"A free, open-source program for creating and animating sprites. Not a game engine — for making game assets.",🤏,pc download,https://libresprite.github.io/#!/
+Twine,"An open-source tool for telling interactive, nonlinear stories. Start with no code, then extend with variables, logic, images, CSS and JavaScript. Publishes straight to HTML and is free for any use, including commercial.",🤏🤏,"pc download, web browser",https://twinery.org/
+Ren'Py,"A visual novel engine used by thousands of creators to tell interactive stories with words, images and sounds, on desktop and mobile. Open source and free for commercial use.",🤏🤏,pc download,https://www.renpy.org/
+Decker,"A multimedia platform for creating and sharing interactive documents — with sound, images, hypertext and scripted behavior.",🤏🤏,"pc download, web browser",https://beyondloom.com/decker/tour.html
+Pico-8,"A fantasy console for making, sharing and playing tiny games. Comes with a commandline, cartridge creation tools and an online cartridge browser called SPLORE.",🤏🤏,pc download,https://www.lexaloffle.com/pico-8.php
+inkly,A narrative scripting language for games.,🤏🤏,pc download,https://www.inklestudios.com/ink/
+Phaser,"Create amazing 2D games for the web — free, open source and AI-ready.",🤏🤏,pc download,https://phaser.io/
+Godot,"Your free, open-source game engine. Not tiny in itself, but great for tiny games — pick a template project to start.",🤏🤏🤏,pc download,https://godotengine.org/
+LÖVE,"An awesome framework for making 2D games in Lua. Free, open-source, and runs on Windows, macOS, Linux, Android and iOS.",🤏🤏🤏,pc download,https://love2d.org/
+GameMaker,"A complete development tool for making 2D games — used by indie devs, studios and educators worldwide, with exports to many platforms.",🤏🤏🤏,pc download,https://gamemaker.io/en
